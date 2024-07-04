@@ -8,6 +8,6 @@ namespace Data.Abstract
 {
     public interface IProductDal:IGenericDal<Product>
     {
-        
+        List<Product> GetProductsWithCategory();
     }
 }
