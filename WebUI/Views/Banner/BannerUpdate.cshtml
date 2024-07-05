@@ -1,0 +1,38 @@
+@model GetByIdBannerDto
+@{
+    ViewData["Title"] = "BannerUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kategori Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Banner" asp-action="BannerUpdate" method="post">
+                            <input type="hidden" asp-for="BannerId">
+                            <div class="form-group">
+                                <label for="BannerTitle">Başlık</label>
+                                <input type="text" class="form-control" asp-for="BannerTitle" id="BannerTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="BannerSubTitle">Alt Başlık</label>
+                                <input type="text" class="form-control" asp-for="BannerSubTitle" id="BannerSubTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="BannerLink">Link</label>
+                                <input type="text" class="form-control" asp-for="BannerLink" id="BannerLink">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="Banner" asp-action="BannerList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

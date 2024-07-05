@@ -1,0 +1,38 @@
+@model GetByIdTestimonialDto
+@{
+    ViewData["Title"] = "TestimonialUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kategori Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Testimonial" asp-action="TestimonialUpdate" method="post">
+                            <input type="hidden" asp-for="TestimonialId">
+                            <div class="form-group">
+                                <label for="TestimonialFullname">Ad Soyad</label>
+                                <input type="text" class="form-control" asp-for="TestimonialFullname" id="TestimonialFullname">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialTitle">Başlık</label>
+                                <input type="text" class="form-control" asp-for="TestimonialTitle" id="TestimonialTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialComment">Yorum</label>
+                                <input type="text" class="form-control" asp-for="TestimonialComment" id="TestimonialComment">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="Testimonial" asp-action="TestimonialList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

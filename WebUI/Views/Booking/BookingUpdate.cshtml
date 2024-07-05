@@ -1,0 +1,43 @@
+@model GetByIdBookingDto
+@{
+    ViewData["Title"] = "BookingUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kategori Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Booking" asp-action="BookingUpdate" method="post">
+                            <input type="hidden" asp-for="BookingId">
+                            <input type="hidden" asp-for="BookingDate">
+                            <div class="form-group">
+                                <label for="BookingFullname">Ad Soyad</label>
+                                <input type="text" class="form-control" asp-for="BookingFullname" id="BookingFullname">
+                            </div>
+                            <div class="form-group">
+                                <label for="BookingPhone">Telefon Numarası</label>
+                                <input type="text" class="form-control" asp-for="BookingPhone" id="BookingPhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="BookingMail">Mail</label>
+                                <input type="text" class="form-control" asp-for="BookingMail" id="BookingMail">
+                            </div>
+                            <div class="form-group">
+                                <label for="BookingPersonCount">Kişi</label>
+                                <input type="text" class="form-control" asp-for="BookingPersonCount" id="BookingPersonCount">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="Booking" asp-action="BookingList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

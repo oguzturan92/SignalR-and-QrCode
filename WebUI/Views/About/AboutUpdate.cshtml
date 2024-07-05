@@ -1,0 +1,38 @@
+@model GetByIdAboutDto
+@{
+    ViewData["Title"] = "AboutUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kategori Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="About" asp-action="AboutUpdate" method="post">
+                            <input type="hidden" asp-for="AboutId">
+                            <div class="form-group">
+                                <label for="AboutTitle">Başlık</label>
+                                <input type="text" class="form-control" asp-for="AboutTitle" id="AboutTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="AboutDescription">Açıklama</label>
+                                <input type="text" class="form-control" asp-for="AboutDescription" id="AboutDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="AboutImage">Resim</label>
+                                <input type="text" class="form-control" asp-for="AboutImage" id="AboutImage">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="About" asp-action="AboutList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,6 +1,6 @@
-@model List<ResultCategoryDto>
+@model List<ResultTestimonialDto>
 @{
-    ViewData["Title"] = "CategoryList";
+    ViewData["Title"] = "TestimonialList";
     Layout = "_LayoutAdmin";
     int count = 0;
 }
@@ -19,8 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col">Başlık</th>
-                                        <th scope="col">Durum</th>
+                                        <th scope="col">Ad Soyad</th>
                                         <th scope="col" colspan="2"></th>
                                     </tr>
                                 </thead>
@@ -30,18 +29,9 @@
                                         count++;
                                         <tr>
                                             <td>@count</td>
-                                            <td>@item.CategoryName</td>
-                                            <td>
-                                                @if (item.CategoryStatus)
-                                                {
-                                                    <i class="la la-check-circle-o rounded-circle text-success la-2x"></i>
-                                                } else
-                                                {
-                                                    <i class="la la-times-circle-o rounded-circle text-danger la-2x"></i>
-                                                }
-                                            </td>
-                                            <td><a class="btn btn-info" asp-controller="Category" asp-action="CategoryUpdate" asp-route-id="@item.CategoryId"><i class="la la-pencil"></i></a></td>
-                                            <td><a class="btn btn-danger" asp-controller="Category" asp-action="CategoryDelete" asp-route-id="@item.CategoryId"><i class="la la-trash"></i></a></td>
+                                            <td>@item.TestimonialFullname</td>
+                                            <td><a class="btn btn-info" asp-controller="Testimonial" asp-action="TestimonialUpdate" asp-route-id="@item.TestimonialId"><i class="la la-pencil"></i></a></td>
+                                            <td><a class="btn btn-danger" asp-controller="Testimonial" asp-action="TestimonialDelete" asp-route-id="@item.TestimonialId"><i class="la la-trash"></i></a></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -51,7 +41,7 @@
                             <div class="alert alert-warning" role="alert">Öge mevcut değil</div>
                         }
                         <hr>
-                        <a class="btn btn-success" asp-controller="Category" asp-action="CategoryCreate">Yeni</a>
+                        <a class="btn btn-success" asp-controller="Testimonial" asp-action="TestimonialCreate">Yeni</a>
                     </div>
                 </div>
             </div>
