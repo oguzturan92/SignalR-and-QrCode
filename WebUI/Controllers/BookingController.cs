@@ -109,5 +109,11 @@ namespace WebUI.Controllers
             TempData["text"] = "İşlem başarısız.";
             return RedirectToAction("BookingList", "Booking");
         }
+
+        public IActionResult Index()
+        {
+            ViewBag.bookingIndex = "active";
+            return View();
+        }
     }
 }

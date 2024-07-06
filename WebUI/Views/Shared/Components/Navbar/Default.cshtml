@@ -1,0 +1,59 @@
+
+
+    <div class="hero_area">
+
+        <div class="bg-box">
+            <img src="/Template/images/hero-bg.jpg" alt="">
+        </div>
+
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                        <span>Feane</span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""> </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav  mx-auto ">
+                            <li class="nav-item @(ViewBag.homeIndex == "active" ? "active":"")">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                            </li>
+                            <li class="nav-item @(ViewBag.productIndex == "active" ? "active":"")">
+                                <a class="nav-link active" asp-controller="Product" asp-action="Index">Menu</a>
+                            </li>
+                            <li class="nav-item @(ViewBag.aboutIndex == "active" ? "active":"")">
+                                <a class="nav-link" asp-controller="About" asp-action="Index">Hakkımızda</a>
+                            </li>
+                            <li class="nav-item @(ViewBag.bookingIndex == "active" ? "active":"")">
+                                <a class="nav-link" asp-controller="Booking" asp-action="Index">Rezervasyon Yap</a>
+                            </li>
+                        </ul>
+                        <div class="user_option">
+                            <a href="" class="user_link">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <a class="user_link" href="#">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+                            <form class="form-inline">
+                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                            <a href="" class="order_online">Order Online</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        @if (ViewBag.homeIndex == "active")
+        {
+            @await Component.InvokeAsync("Slider")
+        }
+
+    </div>

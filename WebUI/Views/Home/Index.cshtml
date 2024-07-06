@@ -3,7 +3,12 @@
     Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    @await Component.InvokeAsync("Banner")
+    
+    @await Component.InvokeAsync("Product")
+    
+    @await Component.InvokeAsync("About")
+    
+    @await Component.InvokeAsync("Booking")
+    
+    @await Component.InvokeAsync("Testimonial")
