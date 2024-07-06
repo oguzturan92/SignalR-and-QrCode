@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface ICategoryService:IGenericService<Category>
     {
-        
+        int CategoryCount();
     }
 }

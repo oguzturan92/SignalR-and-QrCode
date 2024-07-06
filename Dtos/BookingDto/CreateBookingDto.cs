@@ -11,6 +11,7 @@ namespace Dtos.BookingDto
         public string BookingPhone { get; set; }
         public string BookingMail { get; set; }
         public int BookingPersonCount { get; set; }
+        public bool BookingStatus { get; set; }
         public DateTime BookingDate { get; set; }
     }
 }

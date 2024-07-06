@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WebUI.Dtos.CategoryDto;
 using WebUI.Dtos.ProductDto;
 
 namespace WebUI.Controllers
@@ -22,21 +23,37 @@ namespace WebUI.Controllers
         {
             ViewBag.productActive = "active";
 
+            if (TempData["signalrActive"] != null)
+            {
+                Console.WriteLine(TempData["signalrActive"]);
+            }
+
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7227/api/Product");
+            var responseMessage = await client.GetAsync("https://localhost:7227/api/Product/GetProductsWithCategory");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult ProductCreate()
+        public async Task<IActionResult> ProductCreate()
         {
             ViewBag.productActive = "active";
+
+            // Kategori Listesi 
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7227/api/Category");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+                ViewBag.categories = values;
+            }
+
             return View();
         }
 
@@ -51,6 +68,7 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("ProductList", "Product");
             }
             return View();
@@ -61,6 +79,17 @@ namespace WebUI.Controllers
         {
             ViewBag.productActive = "active";
 
+            // Kategori Listesi 
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("https://localhost:7227/api/Category");
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage2.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+                ViewBag.categories = values;
+            }
+
+            // Product
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7227/api/Product/" + id);
             if (responseMessage.IsSuccessStatusCode)
@@ -96,9 +125,12 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("ProductList", "Product");
             }
-            return View();
+            TempData["icon"] = "error";
+            TempData["text"] = "İşlem başarısız.";
+            return RedirectToAction("ProductList", "Product");
         }
     }
 }

@@ -17,6 +17,11 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
+        public int CategoryCount()
+        {
+            return _categoryDal.CategoryCount();
+        }
+
         public void Create(Category entity)
         {
             _categoryDal.Create(entity);

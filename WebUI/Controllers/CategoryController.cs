@@ -21,6 +21,11 @@ namespace WebUI.Controllers
         public async Task<IActionResult> CategoryList()
         {
             ViewBag.categoryActive = "active";
+            
+            if (TempData["signalrActive"] != null)
+            {
+                Console.WriteLine(TempData["signalrActive"]);
+            }
 
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7227/api/Category");
@@ -51,6 +56,7 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("CategoryList", "Category");
             }
             return View();
@@ -96,9 +102,12 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("CategoryList", "Category");
             }
-            return View();
+            TempData["icon"] = "error";
+            TempData["text"] = "İşlem başarısız.";
+            return RedirectToAction("CategoryList", "Category");
         }
     }
 }

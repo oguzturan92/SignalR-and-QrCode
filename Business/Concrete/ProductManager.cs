@@ -42,6 +42,11 @@ namespace Business.Concrete
             return _productDal.GetProductsWithCategory();
         }
 
+        public int ProductCount()
+        {
+            return _productDal.ProductCount();
+        }
+
         public void Update(Product entity)
         {
             _productDal.Update(entity);

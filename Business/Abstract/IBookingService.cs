@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface IBookingService:IGenericService<Booking>
     {
-        
+        int BookingCount();
     }
 }

@@ -98,7 +98,9 @@ namespace WebUI.Controllers
                 TempData["text"] = "İşlem başarılı.";
                 return RedirectToAction("TestimonialList", "Testimonial");
             }
-            return View();
+            TempData["icon"] = "error";
+            TempData["text"] = "İşlem başarısız.";
+            return RedirectToAction("TestimonialList", "Testimonial");
         }
     }
 }

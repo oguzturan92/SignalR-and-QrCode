@@ -89,6 +89,9 @@ namespace Data.Migrations
                     b.Property<string>("BookingPhone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("BookingStatus")
+                        .HasColumnType("bit");
+
                     b.HasKey("BookingId");
 
                     b.ToTable("Bookings");
@@ -111,6 +114,58 @@ namespace Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderTableNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("OrderTotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.OrderLine", b =>
+                {
+                    b.Property<int>("OrderLineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderLineId"), 1L, 1);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderLineId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderLines");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Product", b =>
@@ -190,6 +245,17 @@ namespace Data.Migrations
                     b.ToTable("Testimonials");
                 });
 
+            modelBuilder.Entity("Entity.Concrete.OrderLine", b =>
+                {
+                    b.HasOne("Entity.Concrete.Order", "Order")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Entity.Concrete.Product", b =>
                 {
                     b.HasOne("Entity.Concrete.Category", "Category")
@@ -204,6 +270,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Entity.Concrete.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Order", b =>
+                {
+                    b.Navigation("OrderLines");
                 });
 #pragma warning restore 612, 618
         }

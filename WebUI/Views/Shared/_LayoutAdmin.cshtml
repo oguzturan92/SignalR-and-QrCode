@@ -27,6 +27,8 @@
 	</div>
 
     @await Component.InvokeAsync("Scripts")
+    
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

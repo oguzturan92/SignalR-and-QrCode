@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Kategori Listesi</div>
+                        <div class="card-title">Rezervasyon Listesi</div>
                     </div>
                     <div class="card-body">
                         @if (Model.Any())
@@ -21,6 +21,7 @@
                                         <th scope="col"></th>
                                         <th scope="col">Tarih</th>
                                         <th scope="col">Ad Soyad</th>
+                                        <th scope="col">Durum</th>
                                         <th scope="col" colspan="2"></th>
                                     </tr>
                                 </thead>
@@ -32,6 +33,15 @@
                                             <td>@count</td>
                                             <td>@item.BookingDate</td>
                                             <td>@item.BookingFullname</td>
+                                            <td>
+                                                @if (item.BookingStatus)
+                                                {
+                                                    <i class="la la-check-circle-o rounded-circle text-success la-2x"></i>
+                                                } else
+                                                {
+                                                    <i class="la la-times-circle-o rounded-circle text-danger la-2x"></i>
+                                                }
+                                            </td>
                                             <td><a class="btn btn-info" asp-controller="Booking" asp-action="BookingUpdate" asp-route-id="@item.BookingId"><i class="la la-pencil"></i></a></td>
                                             <td><a class="btn btn-danger" asp-controller="Booking" asp-action="BookingDelete" asp-route-id="@item.BookingId"><i class="la la-trash"></i></a></td>
                                         </tr>
@@ -49,3 +59,26 @@
             </div>
         </div>
     </div>
+
+@if (TempData["signalrActive"] != null)
+{
+    @section Scripts
+    {
+        <script src="/lib/signalr/signalr.js"></script>
+        <script src="/lib/signalr/signalr.min.js"></script>
+
+        <script>
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+            // Connection, Start olduktan sonra
+            connection.start().then(() => {
+                
+                // Hub sınıfı metod adı ile metod tetiklenir
+                connection.invoke("SendBookingCount");
+
+            }).catch((err) => { console.log(err) });
+
+        </script>
+    }
+}

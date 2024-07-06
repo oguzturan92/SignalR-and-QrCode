@@ -1,4 +1,5 @@
 using System.Reflection;
+using Api.Hubs;
 using Business.Abstract;
 using Business.Concrete;
 using Data.Abstract;
@@ -8,6 +9,17 @@ using Data.EntityFramework;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+    builder.Services.AddCors(opt => { // SignalR Cors Politikası 1.adım
+        opt.AddPolicy("CorsPolicy",builder => 
+        {
+            builder.AllowAnyHeader()
+            .AllowAnyMethod()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials();
+        });
+    });
+    builder.Services.AddSignalR(); // SignalR 1.adım
 
     builder.Services.AddDbContext<Context>();
 
@@ -48,10 +60,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+    app.UseCors("CorsPolicy"); // Cors Policy 2.adımı
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+    app.MapHub<SignalRHub>("/signalrhub"); // SignalR 2.adım
 
 app.Run();

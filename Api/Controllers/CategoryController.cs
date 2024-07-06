@@ -69,5 +69,12 @@ namespace Api.Controllers
             _categoryService.Delete(value);
             return Ok("Silme İşlemi Başarılı");
         }
+
+        [HttpGet("CategoryCount")]
+        public async Task<IActionResult> CategoryCount()
+        {
+            var result = _categoryService.CategoryCount();
+            return Ok(result);
+        }
     }
 }

@@ -3,29 +3,70 @@
     Layout = "_LayoutAdmin";
 }
 
+@section Scripts
+{
+    <script src="/lib/signalr/signalr.js"></script>
+    <script src="/lib/signalr/signalr.min.js"></script>
+
+    <script>
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+        // Connection, Start olduktan sonra
+        connection.start().then(() => {
+
+            // Hub sınıfı metod adı ile metod tetiklenir
+            connection.invoke("SendBookingCount");
+            connection.invoke("SendCategoryCount");
+            connection.invoke("SendProductCount");
+
+            // Hub sınıfından gelen metodlar/yanıtlar
+            connection.on("ReceiveBookingCount", function (value) {
+                $("#bookingCount").text(value);
+            });
+            connection.on("ReceiveCategoryCount", function (value) {
+                $("#categoryCount").text(value);
+            });
+            connection.on("ReceiveProductCount", function (value) {
+                $("#productCount").text(value);
+            });
+
+        }).catch((err) => { console.log(err) });
+
+    </script>
+}
+
+@* <div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-success">Bağlantı Durumu : <strong id="connstatus"></strong></div>
+        <div class="alert alert-warning">Kategori Sayısı : <strong id="categoryCount"></strong></div>
+    </div>
+</div> *@
+
 <div class="container-fluid">
-    <h4 class="page-title">Dashboard</h4>
+    
+    <!-- İSTATİSTİKLER -->
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-stats card-warning">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-users"></i>
+                                <i class="la la-clone"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Visitors</p>
-                                <h4 class="card-title">1,294</h4>
+                                <p class="card-category">Kategoriler</p>
+                                <h4 class="card-title" id="categoryCount"></h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-stats card-success">
                 <div class="card-body ">
                     <div class="row">
@@ -36,34 +77,34 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Sales</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <p class="card-category">Ürünler</p>
+                                <h4 class="card-title" id="productCount"></h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-stats card-danger">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-newspaper-o"></i>
+                                <i class="la la-pencil-square"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Subscribers</p>
-                                <h4 class="card-title">1303</h4>
+                                <p class="card-category">Siparişler</p>
+                                <h4 class="card-title" id="bookingCount"></h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        @* <div class="col-md-3">
             <div class="card card-stats card-primary">
                 <div class="card-body ">
                     <div class="row">
@@ -81,84 +122,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-<!-- 							<div class="col-md-3">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="la la-pie-chart text-warning"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Number</p>
-                                <h4 class="card-title">150GB</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="la la-bar-chart text-success"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Revenue</p>
-                                <h4 class="card-title">$ 1,345</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stats">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="la la-times-circle-o text-danger"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Errors</p>
-                                <h4 class="card-title">23</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stats">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="la la-heart-o text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Followers</p>
-                                <h4 class="card-title">+45K</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        </div> *@
     </div>
+
     <div class="row">
         <div class="col-md-3">
             <div class="card">

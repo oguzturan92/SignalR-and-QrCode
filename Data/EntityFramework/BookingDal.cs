@@ -14,5 +14,13 @@ namespace Data.EntityFramework
         public BookingDal(Context context) : base(context)
         {
         }
+
+        public int BookingCount()
+        {
+            using (var context = new Context())
+            {
+                return context.Bookings.Count();
+            }
+        }
     }
 }

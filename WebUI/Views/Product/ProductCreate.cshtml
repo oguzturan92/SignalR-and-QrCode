@@ -1,4 +1,4 @@
-@model CreateCategoryDto
+@model CreateProductDto
 @{
     ViewData["Title"] = "CategoryCreate";
     Layout = "_LayoutAdmin";
@@ -9,25 +9,47 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Kategori Ekle</div>
+                        <div class="card-title">Ürün Ekle</div>
                     </div>
                     <div class="card-body">
-                        <form asp-controller="Category" asp-action="CategoryCreate" method="post">
+                        <form asp-controller="Product" asp-action="ProductCreate" method="post">
                             <div class="form-group">
-                                <label for="CategoryName">Başlık</label>
-                                <input type="text" class="form-control" asp-for="CategoryName" id="CategoryName">
+                                <label for="ProductName">Başlık</label>
+                                <input type="text" class="form-control" asp-for="ProductName" id="ProductName">
                             </div>
                             <div class="form-group">
-                                <label for="CategoryStatus">Durum</label>
-                                <select class="form-control" asp-for="CategoryStatus" id="CategoryStatus">
+                                <label for="ProductDescription">Açıklama</label>
+                                <input type="text" class="form-control" asp-for="ProductDescription" id="ProductDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="ProductPrice">Fiyat</label>
+                                <input type="text" class="form-control" asp-for="ProductPrice" id="ProductPrice">
+                            </div>
+                            <div class="form-group">
+                                <label for="ProductImage">Resim</label>
+                                <input type="text" class="form-control" asp-for="ProductImage" id="ProductImage">
+                            </div>
+                            <div class="form-group">
+                                <label for="ProductStatus">Durum</label>
+                                <select class="form-control" asp-for="ProductStatus" id="ProductStatus">
                                     <option disabled selected>Seçiniz</option>
                                     <option value="True">Açık</option>
                                     <option value="False">Kapalı</option>
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="CategoryId">Kategori</label>
+                                <select class="form-control" asp-for="CategoryId" id="CategoryId">
+                                    <option disabled selected>Seçiniz</option>
+                                    @foreach (var item in ViewBag.categories)
+                                    {
+                                        <option value="@item.CategoryId">@item.CategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-success" type="submit">Kaydet</button>
-                                <a class="btn btn-light ml-2" asp-controller="Category" asp-action="CategoryList">Geri</a>
+                                <a class="btn btn-light ml-2" asp-controller="Product" asp-action="ProductList">Geri</a>
                             </div>
                         </form>
                     </div>

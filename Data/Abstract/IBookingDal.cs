@@ -8,6 +8,6 @@ namespace Data.Abstract
 {
     public interface IBookingDal:IGenericDal<Booking>
     {
-        
+        int BookingCount();
     }
 }

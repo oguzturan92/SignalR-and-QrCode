@@ -39,7 +39,8 @@ namespace Api.Controllers
                 ProductDescription = createProductDto.ProductDescription,
                 ProductPrice = createProductDto.ProductPrice,
                 ProductImage = createProductDto.ProductImage,
-                ProductStatus = createProductDto.ProductStatus
+                ProductStatus = createProductDto.ProductStatus,
+                CategoryId = createProductDto.CategoryId
             };
             _productService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -69,7 +70,7 @@ namespace Api.Controllers
             return Ok("Güncelleme işlemi başarılı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult ProductDelete(int id)
         {
             var value = _productService.GetById(id);
@@ -82,13 +83,19 @@ namespace Api.Controllers
         {
             var products = _productService.GetProductsWithCategory(); // 1.adım: Product, Include ile Category'i de aldı ve geldi
             var values = _mapper.Map<List<ResultProductWithCategoryDto>>(products); // 2.adım: Product Dto ile Mapl'lendi
-
             for (int i = 0; i < values.Count(); i++)
             { // 3.adım: Dto içindeki CategoryName property'sine, Product içindeki Category.CategoryName bilgisi gönderildi.
                 values[i].CategoryName = products[i].Category.CategoryName;
             }
 
             return Ok(values);
+        }
+
+        [HttpGet("ProductCount")]
+        public async Task<IActionResult> ProductCount()
+        {
+            var result = _productService.ProductCount();
+            return Ok(result);
         }
     }
 }

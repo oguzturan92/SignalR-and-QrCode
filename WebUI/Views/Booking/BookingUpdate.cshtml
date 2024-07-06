@@ -9,12 +9,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Kategori Güncelle</div>
+                        <div class="card-title">Rezervasyon Güncelle</div>
                     </div>
                     <div class="card-body">
                         <form asp-controller="Booking" asp-action="BookingUpdate" method="post">
                             <input type="hidden" asp-for="BookingId">
-                            <input type="hidden" asp-for="BookingDate">
                             <div class="form-group">
                                 <label for="BookingFullname">Ad Soyad</label>
                                 <input type="text" class="form-control" asp-for="BookingFullname" id="BookingFullname">
@@ -30,6 +29,17 @@
                             <div class="form-group">
                                 <label for="BookingPersonCount">Kişi</label>
                                 <input type="text" class="form-control" asp-for="BookingPersonCount" id="BookingPersonCount">
+                            </div>
+                            <div class="form-group">
+                                <label for="BookingDate">Tarih</label>
+                                <input type="date" class="form-control" asp-for="BookingDate" id="BookingDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="BookingStatus">Durum</label>
+                                <select class="form-control" asp-for="BookingStatus" id="BookingStatus">
+                                    <option value="True">Açık</option>
+                                    <option value="False">Kapalı</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success" type="submit">Kaydet</button>

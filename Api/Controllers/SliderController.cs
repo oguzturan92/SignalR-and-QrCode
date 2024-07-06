@@ -64,7 +64,7 @@ namespace Api.Controllers
             return Ok("Güncelleme işlemi başarılı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult SliderDelete(int id)
         {
             var value = _sliderService.GetById(id);

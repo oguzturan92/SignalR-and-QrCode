@@ -57,3 +57,27 @@
             </div>
         </div>
     </div>
+
+<!-- Create ve Delete Metotdlarında işlem başarılıysa, List metoduna yanıt gider. List metoduna gelen sonucu buraya aktarırız ve SignalR Send metodlarını tetikleriz. Böylelikle, SignalR sonuçları sayfalara yansır.  -->
+@if (TempData["signalrActive"] != null)
+{
+    @section Scripts
+    {
+        <script src="/lib/signalr/signalr.js"></script>
+        <script src="/lib/signalr/signalr.min.js"></script>
+
+        <script>
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+            // Connection, Start olduktan sonra
+            connection.start().then(() => {
+                
+                // Hub sınıfı metod adı ile metod tetiklenir
+                connection.invoke("SendCategoryCount");
+
+            }).catch((err) => { console.log(err) });
+
+        </script>
+    }
+}

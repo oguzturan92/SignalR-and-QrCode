@@ -39,7 +39,8 @@ namespace Api.Controllers
                 BookingPhone = createBookingDto.BookingPhone,
                 BookingMail = createBookingDto.BookingMail,
                 BookingPersonCount = createBookingDto.BookingPersonCount,
-                BookingDate = createBookingDto.BookingDate
+                BookingDate = createBookingDto.BookingDate,
+                BookingStatus = createBookingDto.BookingStatus
             };
             _bookingService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -62,18 +63,26 @@ namespace Api.Controllers
                 BookingPhone = updateBookingDto.BookingPhone,
                 BookingMail = updateBookingDto.BookingMail,
                 BookingPersonCount = updateBookingDto.BookingPersonCount,
-                BookingDate = updateBookingDto.BookingDate
+                BookingDate = updateBookingDto.BookingDate,
+                BookingStatus = updateBookingDto.BookingStatus
             };
             _bookingService.Update(value);
             return Ok("Güncelleme işlemi başarılı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult BookingDelete(int id)
         {
             var value = _bookingService.GetById(id);
             _bookingService.Delete(value);
             return Ok("Silme İşlemi Başarılı");
+        }
+
+        [HttpGet("BookingCount")]
+        public async Task<IActionResult> BookingCount()
+        {
+            var result = _bookingService.BookingCount();
+            return Ok(result);
         }
     }
 }

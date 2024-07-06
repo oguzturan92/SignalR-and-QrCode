@@ -45,10 +45,52 @@
 					<p>Dashboard</p>
 				</a>
 			</li>
+			<li class="nav-item @ViewBag.orderActive">
+				<a asp-controller="Order" asp-action="OrderList">
+					<i class="la la-dashboard"></i>
+					<p>Siparişler</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.aboutActive">
+				<a asp-controller="About" asp-action="AboutList">
+					<i class="la la-dashboard"></i>
+					<p>Hakkımızda</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.bannerActive">
+				<a asp-controller="Banner" asp-action="BannerList">
+					<i class="la la-dashboard"></i>
+					<p>Banner</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.bookingActive">
+				<a asp-controller="Booking" asp-action="BookingList">
+					<i class="la la-dashboard"></i>
+					<p>Rezervasyonlar</p>
+				</a>
+			</li>
 			<li class="nav-item @ViewBag.categoryActive">
 				<a asp-controller="Category" asp-action="CategoryList">
 					<i class="la la-dashboard"></i>
 					<p>Kategoriler</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.productActive">
+				<a asp-controller="Product" asp-action="ProductList">
+					<i class="la la-dashboard"></i>
+					<p>Ürünler</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.sliderActive">
+				<a asp-controller="Slider" asp-action="SliderList">
+					<i class="la la-dashboard"></i>
+					<p>Slider</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.testimonialActive">
+				<a asp-controller="Testimonial" asp-action="TestimonialList">
+					<i class="la la-dashboard"></i>
+					<p>Deneyimleyenler</p>
 				</a>
 			</li>
 		</ul>

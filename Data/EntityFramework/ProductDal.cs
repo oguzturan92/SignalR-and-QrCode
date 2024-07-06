@@ -24,5 +24,13 @@ namespace Data.EntityFramework
                 return values;
             }
         }
+
+        public int ProductCount()
+        {
+            using (var context = new Context())
+            {
+                return context.Products.Count();
+            }
+        }
     }
 }

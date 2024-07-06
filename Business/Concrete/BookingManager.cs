@@ -17,6 +17,11 @@ namespace Business.Concrete
             _bookingDal = bookingDal;
         }
 
+        public int BookingCount()
+        {
+            return _bookingDal.BookingCount();
+        }
+
         public void Create(Booking entity)
         {
             _bookingDal.Create(entity);

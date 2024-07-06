@@ -22,6 +22,11 @@ namespace WebUI.Controllers
         {
             ViewBag.bookingActive = "active";
 
+            if (TempData["signalrActive"] != null)
+            {
+                Console.WriteLine(TempData["signalrActive"]);
+            }
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7227/api/Booking");
             if (responseMessage.IsSuccessStatusCode)
@@ -51,6 +56,7 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("BookingList", "Booking");
             }
             return View();
@@ -96,9 +102,12 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("BookingList", "Booking");
             }
-            return View();
+            TempData["icon"] = "error";
+            TempData["text"] = "İşlem başarısız.";
+            return RedirectToAction("BookingList", "Booking");
         }
     }
 }
