@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col"></th>
+                                        <th scope="col"></th>
                                         <th scope="col">Başlık</th>
                                         <th scope="col">Durum</th>
                                         <th scope="col">Fiyat</th>
@@ -32,6 +33,7 @@
                                         count++;
                                         <tr>
                                             <td>@count</td>
+                                            <td><img class="rounded-circle" style="height: 50px; width: 50px; object-fit: cover;" src="@item.ProductImage" alt=""></td>
                                             <td>@item.ProductName</td>
                                             <td>
                                                 @if (item.ProductStatus)

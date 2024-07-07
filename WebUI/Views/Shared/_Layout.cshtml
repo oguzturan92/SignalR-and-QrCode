@@ -30,7 +30,7 @@
     <link href="/Template/css/responsive.css" rel="stylesheet" />
 
 </head>
-<body class="sub_page">
+<body class="@(ViewBag.homeIndex == "active" ? "":"sub_page")">
 
     @await Component.InvokeAsync("Navbar")
 

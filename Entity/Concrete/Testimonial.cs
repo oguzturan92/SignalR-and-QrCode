@@ -11,5 +11,6 @@ namespace Entity.Concrete
         public string TestimonialFullname { get; set; }
         public string TestimonialTitle { get; set; }
         public string TestimonialComment { get; set; }
+        public string TestimonialImage { get; set; }
     }
 }

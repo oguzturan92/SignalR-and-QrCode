@@ -12,5 +12,6 @@ namespace Entity.Concrete
         public string BannerTitle { get; set; }
         public string BannerSubTitle { get; set; }
         public string BannerLink { get; set; }
+        public string BannerImage { get; set; }
     }
 }

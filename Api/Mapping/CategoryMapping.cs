@@ -16,6 +16,7 @@ namespace Api.Mapping
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
             CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
+            CreateMap<Category, ResultCategoryAndProductsDto>().ReverseMap();
         }
     }
 }

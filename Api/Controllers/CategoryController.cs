@@ -76,5 +76,32 @@ namespace Api.Controllers
             var result = _categoryService.CategoryCount();
             return Ok(result);
         }
+
+        [HttpGet("GetCategoriesAndProducts")]
+        public IActionResult GetCategoriesAndProducts()
+        {
+            var categoriesAndProducts = _categoryService.GetCategoriesAndProducts();
+
+            var resultCategoryAndProductsDto = categoriesAndProducts.Select(i => new ResultCategoryAndProductsDto
+            {
+                CategoryId = i.CategoryId,
+                CategoryName = i.CategoryName,
+                CategoryStatus = i.CategoryStatus,
+                Products = i.Products.Select(a => new ResultCategoryAndProductsDto.Product
+                {
+                    ProductId = a.ProductId,
+                    ProductName = a.ProductName,
+                    ProductDescription = a.ProductDescription,
+                    ProductImage = a.ProductImage,
+                    ProductPrice = a.ProductPrice,
+                    ProductStatus = a.ProductStatus,
+                    CategoryId = a.CategoryId
+                }).ToList()
+            }).ToList();
+
+            var values = _mapper.Map<List<ResultCategoryAndProductsDto>>(resultCategoryAndProductsDto);
+
+            return Ok(values);
+        }
     }
 }

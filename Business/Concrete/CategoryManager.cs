@@ -42,6 +42,11 @@ namespace Business.Concrete
             return _categoryDal.GetById(id);
         }
 
+        public List<Category> GetCategoriesAndProducts()
+        {
+            return _categoryDal.GetCategoriesAndProducts();
+        }
+
         public void Update(Category entity)
         {
             _categoryDal.Update(entity);

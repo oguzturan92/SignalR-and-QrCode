@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col"></th>
+                                        <th scope="col"></th>
                                         <th scope="col">Ad Soyad</th>
                                         <th scope="col" colspan="2"></th>
                                     </tr>
@@ -29,6 +30,7 @@
                                         count++;
                                         <tr>
                                             <td>@count</td>
+                                            <td><img class="rounded-circle" style="height: 50px;" src="@item.TestimonialImage" alt=""></td>
                                             <td>@item.TestimonialFullname</td>
                                             <td><a class="btn btn-info" asp-controller="Testimonial" asp-action="TestimonialUpdate" asp-route-id="@item.TestimonialId"><i class="la la-pencil"></i></a></td>
                                             <td><a class="btn btn-danger" asp-controller="Testimonial" asp-action="TestimonialDelete" asp-route-id="@item.TestimonialId"><i class="la la-trash"></i></a></td>

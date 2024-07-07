@@ -37,7 +37,8 @@ namespace Api.Controllers
             {
                 TestimonialFullname = createTestimonialDto.TestimonialFullname,
                 TestimonialTitle = createTestimonialDto.TestimonialTitle,
-                TestimonialComment = createTestimonialDto.TestimonialComment
+                TestimonialComment = createTestimonialDto.TestimonialComment,
+                TestimonialImage = createTestimonialDto.TestimonialImage
             };
             _testimonialService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -58,7 +59,8 @@ namespace Api.Controllers
                 TestimonialId = updateTestimonialDto.TestimonialId,
                 TestimonialFullname = updateTestimonialDto.TestimonialFullname,
                 TestimonialTitle = updateTestimonialDto.TestimonialTitle,
-                TestimonialComment = updateTestimonialDto.TestimonialComment
+                TestimonialComment = updateTestimonialDto.TestimonialComment,
+                TestimonialImage = updateTestimonialDto.TestimonialImage
             };
             _testimonialService.Update(value);
             return Ok("Güncelleme işlemi başarılı");

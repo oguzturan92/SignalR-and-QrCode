@@ -37,7 +37,8 @@ namespace Api.Controllers
             {
                 BannerTitle = createBannerDto.BannerTitle,
                 BannerSubTitle = createBannerDto.BannerSubTitle,
-                BannerLink = createBannerDto.BannerLink
+                BannerLink = createBannerDto.BannerLink,
+                BannerImage = createBannerDto.BannerImage
             };
             _bannerService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -58,7 +59,8 @@ namespace Api.Controllers
                 BannerId = updateBannerDto.BannerId,
                 BannerTitle = updateBannerDto.BannerTitle,
                 BannerSubTitle = updateBannerDto.BannerSubTitle,
-                BannerLink = updateBannerDto.BannerLink
+                BannerLink = updateBannerDto.BannerLink,
+                BannerImage = updateBannerDto.BannerImage
             };
             _bannerService.Update(value);
             return Ok("Güncelleme işlemi başarılı");

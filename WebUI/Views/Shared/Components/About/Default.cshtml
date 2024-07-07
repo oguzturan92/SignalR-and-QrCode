@@ -1,30 +1,25 @@
+@model List<ResultAboutDto>
+
+@if (Model.Any())
+{
     <section class="about_section layout_padding">
         <div class="container  ">
-
-        <div class="row">
-            <div class="col-md-6 ">
-            <div class="img-box">
-                <img src="/Template/images/about-img.png" alt="">
-            </div>
-            </div>
-            <div class="col-md-6">
-            <div class="detail-box">
-                <div class="heading_container">
-                <h2>
-                    We Are Feane
-                </h2>
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="img-box">
+                        <img src="@Model[0].AboutImage" alt="">
+                    </div>
                 </div>
-                <p>
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-                are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-                the middle of text. All
-                </p>
-                <a href="">
-                Read More
-                </a>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <div class="heading_container">
+                            <h2>@Model[0].AboutTitle</h2>
+                        </div>
+                        <p>@Model[0].AboutDescription</p>
+                        <a asp-controller="About" asp-action="Index">Daha Fazla...</a>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
         </div>
     </section>
+}
