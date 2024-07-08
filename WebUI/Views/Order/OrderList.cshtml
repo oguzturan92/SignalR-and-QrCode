@@ -1,0 +1,63 @@
+@model List<ResultOrderDto>
+@{
+    ViewData["Title"] = "OrderList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Adisyon Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Any())
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Tarih</th>
+                                        <th scope="col">Masa Adı</th>
+                                        <th scope="col">Durum</th>
+                                        <th scope="col">Tutar</th>
+                                        <th scope="col" colspan="2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.OrderDate</td>
+                                            <td>@item.OrderTableNumber</td>
+                                            <td>
+                                                @if (item.OrderComplate)
+                                                {
+                                                    <i class="la la-check-circle-o rounded-circle text-success la-2x"></i>
+                                                } else
+                                                {
+                                                    <i class="la la-times-circle-o rounded-circle text-danger la-2x"></i>
+                                                }
+                                            </td>
+                                            <td>@item.OrderTotalPrice</td>
+                                            <td><a class="btn btn-info" asp-controller="Order" asp-action="OrderUpdate" asp-route-id="@item.OrderId"><i class="la la-pencil"></i></a></td>
+                                            <td><a class="btn btn-danger" asp-controller="Order" asp-action="OrderDelete" asp-route-id="@item.OrderId"><i class="la la-trash"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Öge mevcut değil</div>
+                        }
+                        <hr>
+                        <a class="btn btn-success" asp-controller="Order" asp-action="OrderCreate">Yeni</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

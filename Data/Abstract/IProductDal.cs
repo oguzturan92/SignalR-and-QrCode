@@ -9,6 +9,7 @@ namespace Data.Abstract
     public interface IProductDal:IGenericDal<Product>
     {
         List<Product> GetProductsWithCategory();
+        List<Product> GetProductsWithCategoryStatusTrue();
         int ProductCount();
     }
 }

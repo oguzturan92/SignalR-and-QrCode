@@ -42,6 +42,11 @@ namespace Business.Concrete
             return _productDal.GetProductsWithCategory();
         }
 
+        public List<Product> GetProductsWithCategoryStatusTrue()
+        {
+            return _productDal.GetProductsWithCategoryStatusTrue();
+        }
+
         public int ProductCount()
         {
             return _productDal.ProductCount();

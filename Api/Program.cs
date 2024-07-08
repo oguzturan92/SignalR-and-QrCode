@@ -37,11 +37,20 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddScoped<ICategoryService, CategoryManager>();
     builder.Services.AddScoped<ICategoryDal, CategoryDal>();
 
+    builder.Services.AddScoped<IOrderService, OrderManager>();
+    builder.Services.AddScoped<IOrderDal, OrderDal>();
+
+    builder.Services.AddScoped<IOrderLineService, OrderLineManager>();
+    builder.Services.AddScoped<IOrderLineDal, OrderLineDal>();
+
     builder.Services.AddScoped<IProductService, ProductManager>();
     builder.Services.AddScoped<IProductDal, ProductDal>();
 
     builder.Services.AddScoped<ISliderService, SliderManager>();
     builder.Services.AddScoped<ISliderDal, SliderDal>();
+
+    builder.Services.AddScoped<ITableService, TableManager>();
+    builder.Services.AddScoped<ITableDal, TableDal>();
 
     builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
     builder.Services.AddScoped<ITestimonialDal, TestimonialDal>();

@@ -127,6 +127,9 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
+                    b.Property<bool>("OrderComplate")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -138,6 +141,9 @@ namespace Data.Migrations
 
                     b.Property<decimal>("OrderTotalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TableId")
+                        .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
@@ -224,6 +230,25 @@ namespace Data.Migrations
                     b.HasKey("SliderId");
 
                     b.ToTable("Sliders");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Table", b =>
+                {
+                    b.Property<int>("TableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TableId"), 1L, 1);
+
+                    b.Property<bool>("TableStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TableTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TableId");
+
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Testimonial", b =>

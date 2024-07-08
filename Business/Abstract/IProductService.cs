@@ -9,6 +9,7 @@ namespace Business.Abstract
     public interface IProductService:IGenericService<Product>
     {
         List<Product> GetProductsWithCategory();
+        List<Product> GetProductsWithCategoryStatusTrue();
         int ProductCount();
     }
 }

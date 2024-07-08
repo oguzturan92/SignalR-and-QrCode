@@ -37,6 +37,11 @@ namespace Business.Concrete
             return _orderDal.GetById(id);
         }
 
+        public Order OrderAndOrderLine(int tableId)
+        {
+            return _orderDal.OrderAndOrderLine(tableId);
+        }
+
         public void Update(Order entity)
         {
             _orderDal.Update(entity);

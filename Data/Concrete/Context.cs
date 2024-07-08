@@ -21,6 +21,7 @@ namespace Data.Concrete
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Table> Tables { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
     }
 }

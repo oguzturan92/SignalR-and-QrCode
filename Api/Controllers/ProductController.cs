@@ -91,6 +91,20 @@ namespace Api.Controllers
             return Ok(values);
         }
 
+        [HttpGet("GetProductsWithCategoryStatusTrue")]
+        public IActionResult GetProductsWithCategoryStatusTrue()
+        {
+            var products = _productService.GetProductsWithCategoryStatusTrue();
+
+            var values = _mapper.Map<List<ResultProductWithCategoryDto>>(products);
+            for (int i = 0; i < values.Count(); i++)
+            {
+                values[i].CategoryName = products[i].Category.CategoryName;
+            }
+
+            return Ok(values);
+        }
+
         [HttpGet("ProductCount")]
         public async Task<IActionResult> ProductCount()
         {

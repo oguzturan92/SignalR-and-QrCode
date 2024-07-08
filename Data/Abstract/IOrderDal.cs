@@ -8,6 +8,6 @@ namespace Data.Abstract
 {
     public interface IOrderDal:IGenericDal<Order>
     {
-        
+        Order OrderAndOrderLine(int tableId);
     }
 }

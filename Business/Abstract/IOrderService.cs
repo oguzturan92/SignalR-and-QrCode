@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface IOrderService:IGenericService<Order>
     {
-        
+        Order OrderAndOrderLine(int tableId);
     }
 }

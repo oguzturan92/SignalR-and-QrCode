@@ -23,11 +23,6 @@ namespace WebUI.Controllers
         {
             ViewBag.productActive = "active";
 
-            if (TempData["signalrActive"] != null)
-            {
-                Console.WriteLine(TempData["signalrActive"]);
-            }
-
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7227/api/Product/GetProductsWithCategory");
             if (responseMessage.IsSuccessStatusCode)

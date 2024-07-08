@@ -35,7 +35,9 @@ namespace Api.Controllers
         {
             var value = new Order()
             {
+                TableId = createOrderDto.TableId,
                 OrderTableNumber = createOrderDto.OrderTableNumber,
+                OrderComplate = createOrderDto.OrderComplate,
                 OrderDescription = createOrderDto.OrderDescription,
                 OrderDate = createOrderDto.OrderDate,
                 OrderTotalPrice = createOrderDto.OrderTotalPrice
@@ -57,7 +59,9 @@ namespace Api.Controllers
             var value = new Order()
             {
                 OrderId = updateOrderDto.OrderId,
+                TableId = updateOrderDto.TableId,
                 OrderTableNumber = updateOrderDto.OrderTableNumber,
+                OrderComplate = updateOrderDto.OrderComplate,
                 OrderDescription = updateOrderDto.OrderDescription,
                 OrderDate = updateOrderDto.OrderDate,
                 OrderTotalPrice = updateOrderDto.OrderTotalPrice

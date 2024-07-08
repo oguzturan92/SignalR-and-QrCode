@@ -25,6 +25,15 @@ namespace Data.EntityFramework
             }
         }
 
+        public List<Product> GetProductsWithCategoryStatusTrue()
+        {
+            using (var context = new Context())
+            {
+                var values = context.Products.Where(i => i.ProductStatus).Include(i => i.Category).ToList();
+                return values;
+            }
+        }
+
         public int ProductCount()
         {
             using (var context = new Context())

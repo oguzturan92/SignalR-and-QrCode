@@ -1,0 +1,167 @@
+@model TableOrderDetailModel
+@{
+    ViewData["Title"] = "TableOrderDetail";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+    <!-- ADİSYON BİLGİSİ -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Adisyon Bilgileri</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Order.OrderId > 0)
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tarih</th>
+                                        <th scope="col">Masa Adı</th>
+                                        <th scope="col">Açıklama</th>
+                                        <th scope="col">Toplam</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>@Model.Order.OrderDate</td>
+                                            <td>@Model.Order.OrderTableNumber</td>
+                                            <td>@Model.Order.OrderDescription</td>
+                                            <td>@Model.Order.OrderLines.Sum(i => i.ProductPrice * i.ProductCount)</td>
+                                            <form  asp-controller="TableOrder" asp-action="TableOrderComplate" asp-route-orderId="@Model.Order.OrderId" method="post">
+                                                <input type="hidden" name="totalPrice" value="@Model.Order.OrderLines.Sum(i => i.ProductPrice * i.ProductCount)">
+                                                <td><button type="submit" class="btn btn-success">Adisyonu Kapat</button></td>
+                                            </form>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Masaya ait açık sipariş mevcut değil</div>
+                            <hr>
+                            <form  asp-controller="TableOrder" asp-action="TableOrderLineAdd" asp-route-tableId="@ViewBag.tableId" method="post">
+                                <input type="hidden" name="tableName" value="@ViewBag.tableTitle">
+                                <button type="submit" class="btn btn-info">Adisyon Aç</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADİSYON DETAY BİLGİSİ -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Adisyon Detay Bilgileri</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Order.OrderId > 0)
+                        {
+                            if (Model.Order.OrderLines.Any())
+                            {
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Ürün Adı</th>
+                                            <th scope="col">Fiyat</th>
+                                            <th scope="col">Miktar</th>
+                                            <th scope="col">Toplam</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Order.OrderLines)
+                                        {
+                                            <tr>
+                                                <td>@item.ProductName</td>
+                                                <td>@item.ProductPrice</td>
+                                                <td>@item.ProductCount</td>
+                                                <td>@(item.ProductPrice * item.ProductCount)</td>
+                                                <form  asp-controller="TableOrder" asp-action="TableOrderLineOut" asp-route-tableId="@ViewBag.tableId" method="post">
+                                                    <input type="hidden" name="productName" value="@item.ProductName">
+                                                    <input type="hidden" name="orderId" value="@Model.Order.OrderId">
+                                                    <td><button type="submit" class="btn btn-danger">Çıkar</button></td>
+                                                </form>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Henüz bir ürün eklenmemiş</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÜRÜN LİSTESİ -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Ürün Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Products.Any())
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col">Başlık</th>
+                                        <th scope="col">Fiyat</th>
+                                        <th scope="col">Kategori</th>
+                                        <th scope="col">Miktar</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Products)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td><img class="rounded-circle" style="height: 50px; width: 50px; object-fit: cover;" src="@item.ProductImage" alt=""></td>
+                                            <td>@item.ProductName</td>
+                                            <td>@item.ProductPrice</td>
+                                            <td>@item.CategoryName</td>
+                                            <form  asp-controller="TableOrder" asp-action="TableOrderLineAdd" asp-route-tableId="@ViewBag.tableId" method="post">
+                                                <input type="hidden" name="productName" value="@item.ProductName">
+                                                <input type="hidden" name="productPrice" value="@item.ProductPrice">
+                                                <input type="hidden" name="orderId" value="@Model.Order.OrderId">
+                                                <td>
+                                                    <select name="productCount" class="form-control">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </td>
+                                                <td><button type="submit" class="btn btn-info">Ekle</button></td>
+                                            </form>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Ürün mevcut değil</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

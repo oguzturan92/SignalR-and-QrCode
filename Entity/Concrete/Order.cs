@@ -9,7 +9,9 @@ namespace Entity.Concrete
     public class Order
     {
         public int OrderId { get; set; }
+        public int TableId { get; set; }
         public string OrderTableNumber { get; set; }
+        public bool OrderComplate { get; set; }
         public string OrderDescription { get; set; }
         public DateTime OrderDate { get; set; }
         

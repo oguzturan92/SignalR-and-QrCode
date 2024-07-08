@@ -1,0 +1,46 @@
+@model GetByIdOrderDto
+@{
+    ViewData["Title"] = "OrderUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Adisyon Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Order" asp-action="OrderUpdate" method="post">
+                            <input type="hidden" asp-for="OrderId">
+                            <input type="hidden" asp-for="TableId">
+                            <input type="hidden" asp-for="OrderComplate">
+                            <input type="hidden" asp-for="OrderDate">
+                            <input type="hidden" asp-for="OrderTotalPrice">
+                            <div class="form-group">
+                                <label>Tarih</label>
+                                <input type="text" class="form-control" value="OrderDate" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="OrderTableNumber">Masa Adı</label>
+                                <input type="text" class="form-control" asp-for="OrderTableNumber" id="OrderTableNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="OrderDescription">Açıklama</label>
+                                <input type="text" class="form-control" asp-for="OrderDescription" id="OrderDescription">
+                            </div>
+                            <div class="form-group">
+                                <label>Toplam Tutar</label>
+                                <input type="text" class="form-control" value="OrderTotalPrice" disabled>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="Order" asp-action="OrderList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
