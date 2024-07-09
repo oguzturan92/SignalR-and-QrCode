@@ -37,6 +37,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddScoped<ICategoryService, CategoryManager>();
     builder.Services.AddScoped<ICategoryDal, CategoryDal>();
 
+    builder.Services.AddScoped<INotificationService, NotificationManager>();
+    builder.Services.AddScoped<INotificationDal, NotificationDal>();
+
     builder.Services.AddScoped<IOrderService, OrderManager>();
     builder.Services.AddScoped<IOrderDal, OrderDal>();
 
