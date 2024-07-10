@@ -8,6 +8,7 @@ namespace Data.Abstract
 {
     public interface ISliderDal:IGenericDal<Slider>
     {
-        
+        List<Slider> GetSliderIsTrue();
+        string GetFirstSliderImage();
     }
 }

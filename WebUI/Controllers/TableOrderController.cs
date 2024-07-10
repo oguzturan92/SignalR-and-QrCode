@@ -43,7 +43,6 @@ namespace WebUI.Controllers
             ViewBag.tableOrderActive = "active";
             ViewBag.tableId = tableId;
             ViewBag.tableTitle = tableTitle;
-            Console.WriteLine(tableTitle);
             
             var model  = new TableOrderDetailModel()
             {
@@ -121,6 +120,7 @@ namespace WebUI.Controllers
                 }
             } else
             {
+                // Adisyon açma
                 var order = new CreateOrderDto()
                 {
                     TableId = tableId,
@@ -138,7 +138,8 @@ namespace WebUI.Controllers
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     TempData["icon"] = "success";
-                    TempData["text"] = "Ürün eklendi.";
+                    TempData["text"] = "Adisyon açıldı.";
+                    TempData["signalrActive"] = "true";
                 }
             }
 

@@ -32,6 +32,11 @@ namespace Business.Concrete
             return _bannerDal.GetAll();
         }
 
+        public List<Banner> GetBannerIsTrue()
+        {
+            return _bannerDal.GetBannerIsTrue();
+        }
+
         public Banner GetById(int id)
         {
             return _bannerDal.GetById(id);

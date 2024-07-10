@@ -8,6 +8,6 @@ namespace Data.Abstract
 {
     public interface IBannerDal:IGenericDal<Banner>
     {
-        
+        List<Banner> GetBannerIsTrue();
     }
 }

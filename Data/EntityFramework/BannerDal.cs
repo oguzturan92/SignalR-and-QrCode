@@ -14,5 +14,13 @@ namespace Data.EntityFramework
         public BannerDal(Context context) : base(context)
         {
         }
+
+        public List<Banner> GetBannerIsTrue()
+        {
+            using (var context = new Context())
+            {
+                return context.Banners.Where(x => x.BannerStatus).ToList();
+            }
+        }
     }
 }

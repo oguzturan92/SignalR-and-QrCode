@@ -162,6 +162,9 @@ namespace Data.Migrations
                     b.Property<string>("BannerLink")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("BannerStatus")
+                        .HasColumnType("bit");
+
                     b.Property<string>("BannerSubTitle")
                         .HasColumnType("nvarchar(max)");
 
@@ -223,6 +226,62 @@ namespace Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Entity.Concrete.Contact", b =>
+                {
+                    b.Property<int>("ContactId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"), 1L, 1);
+
+                    b.Property<string>("ContactAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactMap")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContactId");
+
+                    b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
+
+                    b.Property<string>("MessageContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageFullname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MessageRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageSubject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Entity.Concrete.Notification", b =>
                 {
                     b.Property<int>("NotificationId")
@@ -236,9 +295,6 @@ namespace Data.Migrations
 
                     b.Property<DateTime>("NotificationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("NotificationRead")
-                        .HasColumnType("bit");
 
                     b.HasKey("NotificationId");
 
@@ -344,8 +400,14 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SliderId"), 1L, 1);
 
+                    b.Property<string>("SliderImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SliderLink")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SliderStatus")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SliderSubTitle")
                         .HasColumnType("nvarchar(max)");
@@ -356,6 +418,25 @@ namespace Data.Migrations
                     b.HasKey("SliderId");
 
                     b.ToTable("Sliders");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.SocialMedia", b =>
+                {
+                    b.Property<int>("SocialMediaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaId"), 1L, 1);
+
+                    b.Property<string>("SocialMediaIcon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialMediaLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SocialMediaId");
+
+                    b.ToTable("SocialMedias");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Table", b =>

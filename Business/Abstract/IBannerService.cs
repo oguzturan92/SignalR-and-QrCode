@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface IBannerService:IGenericService<Banner>
     {
-        
+        List<Banner> GetBannerIsTrue();
     }
 }

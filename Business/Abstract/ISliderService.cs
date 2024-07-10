@@ -8,6 +8,7 @@ namespace Business.Abstract
 {
     public interface ISliderService:IGenericService<Slider>
     {
-        
+        List<Slider> GetSliderIsTrue();
+        string GetFirstSliderImage();
     }
 }

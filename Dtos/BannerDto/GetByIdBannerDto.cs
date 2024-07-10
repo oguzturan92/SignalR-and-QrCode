@@ -12,5 +12,6 @@ namespace Dtos.BannerDto
         public string BannerSubTitle { get; set; }
         public string BannerLink { get; set; }
         public string BannerImage { get; set; }
+        public bool BannerStatus { get; set; }
     }
 }

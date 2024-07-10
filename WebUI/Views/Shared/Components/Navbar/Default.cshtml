@@ -3,7 +3,7 @@
     <div class="hero_area">
 
         <div class="bg-box">
-            <img src="/Template/images/hero-bg.jpg" alt="">
+            <img src="@ViewBag.sliderImageFirst" alt="">
         </div>
 
         <header class="header_section">
@@ -29,14 +29,14 @@
                                 <a class="nav-link" asp-controller="About" asp-action="Index">Hakkımızda</a>
                             </li>
                             <li class="nav-item @(ViewBag.bookingIndex == "active" ? "active":"")">
-                                <a class="nav-link" asp-controller="Booking" asp-action="Index">Rezervasyon Yap</a>
+                                <a class="nav-link" asp-controller="Booking" asp-action="Index">İletişim</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin</a>
                             </li>
                         </ul>
                         <div class="user_option">
-                            <a href="" class="user_link">
+                            <a asp-controller="User" asp-action="Login" class="user_link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             <a class="user_link" href="#">

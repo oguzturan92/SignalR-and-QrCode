@@ -14,5 +14,21 @@ namespace Data.EntityFramework
         public SliderDal(Context context) : base(context)
         {
         }
+
+        public string GetFirstSliderImage()
+        {
+            using (var context = new Context())
+            {
+                return context.Sliders.Where(x => x.SliderStatus).FirstOrDefault().SliderImage;
+            }
+        }
+
+        public List<Slider> GetSliderIsTrue()
+        {
+            using (var context = new Context())
+            {
+                return context.Sliders.Where(x => x.SliderStatus).ToList();
+            }
+        }
     }
 }

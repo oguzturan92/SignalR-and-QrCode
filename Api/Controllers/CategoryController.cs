@@ -71,7 +71,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("CategoryCount")]
-        public async Task<IActionResult> CategoryCount()
+        public IActionResult CategoryCount()
         {
             var result = _categoryService.CategoryCount();
             return Ok(result);

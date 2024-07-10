@@ -1,0 +1,41 @@
+@model CreateContactDto
+@{
+    ViewData["Title"] = "ContactCreate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">İletişim Ekle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Contact" asp-action="ContactCreate" method="post">
+                            <div class="form-group">
+                                <label for="ContactMap">Harita Url</label>
+                                <input type="text" class="form-control" asp-for="ContactMap" id="ContactMap">
+                            </div>
+                            <div class="form-group">
+                                <label for="ContactPhone">Telefon Numarası</label>
+                                <input type="text" class="form-control" asp-for="ContactPhone" id="ContactPhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="ContactMail">Mail</label>
+                                <input type="text" class="form-control" asp-for="ContactMail" id="ContactMail">
+                            </div>
+                            <div class="form-group">
+                                <label for="ContactAddress">Adres</label>
+                                <input type="text" class="form-control" asp-for="ContactAddress" id="ContactAddress">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="Contact" asp-action="ContactList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

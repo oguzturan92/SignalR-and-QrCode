@@ -21,6 +21,7 @@
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                         <th scope="col">Başlık</th>
+                                        <th scope="col">Durum</th>
                                         <th scope="col" colspan="2"></th>
                                     </tr>
                                 </thead>
@@ -32,6 +33,15 @@
                                             <td>@count</td>
                                             <td><img class="rounded-circle" style="height: 50px;" src="@item.BannerImage" alt=""></td>
                                             <td>@item.BannerTitle</td>
+                                            <td>
+                                                @if (item.BannerStatus)
+                                                {
+                                                    <i class="la la-check-circle-o rounded-circle text-success la-2x"></i>
+                                                } else
+                                                {
+                                                    <i class="la la-times-circle-o rounded-circle text-danger la-2x"></i>
+                                                }
+                                            </td>
                                             <td><a class="btn btn-info" asp-controller="Banner" asp-action="BannerUpdate" asp-route-id="@item.BannerId"><i class="la la-pencil"></i></a></td>
                                             <td><a class="btn btn-danger" asp-controller="Banner" asp-action="BannerDelete" asp-route-id="@item.BannerId"><i class="la la-trash"></i></a></td>
                                         </tr>

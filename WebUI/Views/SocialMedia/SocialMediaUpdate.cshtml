@@ -1,0 +1,34 @@
+@model GetByIdSocialMediaDto
+@{
+    ViewData["Title"] = "SocialMediaUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Sosyal Medya Güncelle</div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="SocialMedia" asp-action="SocialMediaUpdate" method="post">
+                            <input type="hidden" asp-for="SocialMediaId">
+                            <div class="form-group">
+                                <label for="SocialMediaIcon">İkon</label>
+                                <input type="text" class="form-control" asp-for="SocialMediaIcon" id="SocialMediaIcon">
+                            </div>
+                            <div class="form-group">
+                                <label for="SocialMediaLink">Link</label>
+                                <input type="text" class="form-control" asp-for="SocialMediaLink" id="SocialMediaLink">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Kaydet</button>
+                                <a class="btn btn-light ml-2" asp-controller="SocialMedia" asp-action="SocialMediaList">Geri</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

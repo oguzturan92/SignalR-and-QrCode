@@ -12,18 +12,16 @@ namespace Api.Hubs
         private readonly IBookingService _bookingService;
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IMessageService _messageService;
 
-        public SignalRHub(IBookingService bookingService, ICategoryService categoryService, IProductService productService)
+        public SignalRHub(IBookingService bookingService, ICategoryService categoryService, IProductService productService, IOrderService orderService, IMessageService messageService)
         {
             _bookingService = bookingService;
             _categoryService = categoryService;
             _productService = productService;
-        }
-
-        public async Task SendBookingCount()
-        {
-            var value = _bookingService.GetAll().Count();
-            await Clients.All.SendAsync("ReceiveBookingCount", value);
+            _orderService = orderService;
+            _messageService = messageService;
         }
 
         public async Task SendCategoryCount()
@@ -36,6 +34,24 @@ namespace Api.Hubs
         {
             var value = _productService.GetAll().Count();
             await Clients.All.SendAsync("ReceiveProductCount", value);
+        }
+
+        public async Task SendBookingCount()
+        {
+            var value = _bookingService.GetAll().Count();
+            await Clients.All.SendAsync("ReceiveBookingCount", value);
+        }
+
+        public async Task SendOrderCount()
+        {
+            var value = _orderService.GetAll().Count();
+            await Clients.All.SendAsync("ReceiveOrderCount", value);
+        }
+
+        public async Task SendMessageCount()
+        {
+            var value = _messageService.GetAll().Count();
+            await Clients.All.SendAsync("ReceiveMessageCount", value);
         }
     }
 }

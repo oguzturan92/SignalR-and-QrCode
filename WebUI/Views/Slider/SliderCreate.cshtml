@@ -26,6 +26,18 @@
                                 <input type="text" class="form-control" asp-for="SliderLink" id="SliderLink">
                             </div>
                             <div class="form-group">
+                                <label for="SliderImage">Resim</label>
+                                <input type="text" class="form-control" asp-for="SliderImage" id="SliderImage">
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderStatus">Durum</label>
+                                <select class="form-control" asp-for="SliderStatus" id="SliderStatus">
+                                    <option disabled selected>Seçiniz</option>
+                                    <option value="True">Açık</option>
+                                    <option value="False">Kapalı</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-success" type="submit">Kaydet</button>
                                 <a class="btn btn-light ml-2" asp-controller="Slider" asp-action="SliderList">Geri</a>
                             </div>

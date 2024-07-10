@@ -73,6 +73,7 @@ namespace WebUI.Controllers
             {
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
+                TempData["signalrActive"] = "true";
                 return RedirectToAction("OrderList", "Order");
             }
             TempData["icon"] = "error";

@@ -1,0 +1,80 @@
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>İletişim Formu</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        <form>
+                            <div>
+                                <input type="text" class="form-control" id="messageFullname" placeholder="Ad Soyad" />
+                            </div>
+                            <div>
+                                <input type="email" class="form-control" id="messageMail" placeholder="Mail" />
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="messageSubject" placeholder="Konu" />
+                            </div>
+                            <div>
+                                <textarea style="height: 100px;" id="messageContent" class="form-control"></textarea>
+                            </div>
+                            <div class="btn_box">
+                                <button type="button" id="btnCreateMessage">Gönder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="map_container ">
+                        <iframe src="@ViewBag.mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/lib/signalr/signalr.js"></script>
+    <script src="/lib/signalr/signalr.min.js"></script>
+    <script>
+        $("#btnCreateMessage").click(function () {
+            let messageValues = {
+                MessageFullname: $("#messageFullname").val(),
+                MessageMail: $("#messageMail").val(),
+                MessageSubject: $("#messageSubject").val(),
+                MessageContent: $("#messageContent").val()
+            };
+            
+            $.ajax({
+                type: "post",
+                url: "/Message/MessageCreate/",
+                data: messageValues,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    $("#messageFullname").val("");
+                    $("#messageMail").val("");
+                    $("#messageSubject").val("");
+                    $("#messageContent").val("");
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        html: "Mesajınız alınmıştır. En kısa sürede dönüş sağlayacağız.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+                    connection.start().then(() => {
+                        connection.invoke("SendMessageCount");
+                    }).catch((err) => { console.log(err) });
+                }
+            });
+        });
+    </script>

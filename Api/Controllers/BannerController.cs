@@ -38,7 +38,8 @@ namespace Api.Controllers
                 BannerTitle = createBannerDto.BannerTitle,
                 BannerSubTitle = createBannerDto.BannerSubTitle,
                 BannerLink = createBannerDto.BannerLink,
-                BannerImage = createBannerDto.BannerImage
+                BannerImage = createBannerDto.BannerImage,
+                BannerStatus = createBannerDto.BannerStatus
             };
             _bannerService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -60,7 +61,8 @@ namespace Api.Controllers
                 BannerTitle = updateBannerDto.BannerTitle,
                 BannerSubTitle = updateBannerDto.BannerSubTitle,
                 BannerLink = updateBannerDto.BannerLink,
-                BannerImage = updateBannerDto.BannerImage
+                BannerImage = updateBannerDto.BannerImage,
+                BannerStatus = updateBannerDto.BannerStatus
             };
             _bannerService.Update(value);
             return Ok("Güncelleme işlemi başarılı");
@@ -72,6 +74,13 @@ namespace Api.Controllers
             var value = _bannerService.GetById(id);
             _bannerService.Delete(value);
             return Ok("Silme İşlemi Başarılı");
+        }
+
+        [HttpGet("GetBannerIsTrue")]
+        public IActionResult GetBannerIsTrue()
+        {
+            var values = _mapper.Map<List<ResultBannerDto>>(_bannerService.GetBannerIsTrue());
+            return Ok(values);
         }
     }
 }

@@ -1,0 +1,84 @@
+@model List<ResultMessageDto>
+@{
+    ViewData["Title"] = "MessageList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Mesaj Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Any())
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Tarih</th>
+                                        <th scope="col">Okundu mu?</th>
+                                        <th scope="col">Ad Soyad</th>
+                                        <th scope="col">Mail</th>
+                                        <th scope="col" colspan="2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.MessageDate</td>
+                                            <td>
+                                                @if (item.MessageRead)
+                                                {
+                                                    <i class="la la-check-circle-o rounded-circle text-success la-2x"></i>
+                                                } else
+                                                {
+                                                    <i class="la la-times-circle-o rounded-circle text-danger la-2x"></i>
+                                                }
+                                            </td>
+                                            <td>@item.MessageFullname</td>
+                                            <td>@item.MessageMail</td>
+                                            <td><a class="btn btn-info" asp-controller="Message" asp-action="MessageUpdate" asp-route-id="@item.MessageId"><i class="la la-eye"></i></a></td>
+                                            <td><a class="btn btn-danger" asp-controller="Message" asp-action="MessageDelete" asp-route-id="@item.MessageId"><i class="la la-trash"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Öge mevcut değil</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@if (TempData["signalrActive"] != null)
+{
+    @section Scripts
+    {
+        <script src="/lib/signalr/signalr.js"></script>
+        <script src="/lib/signalr/signalr.min.js"></script>
+
+        <script>
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+            // Connection, Start olduktan sonra
+            connection.start().then(() => {
+                
+                // Hub sınıfı metod adı ile metod tetiklenir
+                connection.invoke("SendMessageCount");
+
+            }).catch((err) => { console.log(err) });
+
+        </script>
+    }
+}

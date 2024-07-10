@@ -16,19 +16,27 @@
         connection.start().then(() => {
 
             // Hub sınıfı metod adı ile metod tetiklenir
-            connection.invoke("SendBookingCount");
             connection.invoke("SendCategoryCount");
             connection.invoke("SendProductCount");
+            connection.invoke("SendBookingCount");
+            connection.invoke("SendOrderCount");
+            connection.invoke("SendMessageCount");
 
             // Hub sınıfından gelen metodlar/yanıtlar
-            connection.on("ReceiveBookingCount", function (value) {
-                $("#bookingCount").text(value);
-            });
             connection.on("ReceiveCategoryCount", function (value) {
                 $("#categoryCount").text(value);
             });
             connection.on("ReceiveProductCount", function (value) {
                 $("#productCount").text(value);
+            });
+            connection.on("ReceiveBookingCount", function (value) {
+                $("#bookingCount").text(value);
+            });
+            connection.on("ReceiveOrderCount", function (value) {
+                $("#orderCount").text(value);
+            });
+            connection.on("receiveMessageCount", function (value) {
+                $("#messageCount").text(value);
             });
 
         }).catch((err) => { console.log(err) });
@@ -89,7 +97,7 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Siparişler</p>
+                                <p class="card-category">Rezervasyon</p>
                                 <h4 class="card-title" id="bookingCount"></h4>
                             </div>
                         </div>
@@ -97,25 +105,44 @@
                 </div>
             </div>
         </div>
-        @* <div class="col-md-3">
-            <div class="card card-stats card-primary">
-                <div class="card-body ">
+        <div class="col-md-4">
+            <div class="card card-stats card-danger" style="background-color: #8c88dc;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-check-circle"></i>
+                                <i class="la la-pencil-square"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Order</p>
-                                <h4 class="card-title">576</h4>
+                                <p class="card-category">Adisyon</p>
+                                <h4 class="card-title" id="orderCount"></h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> *@
+        </div>
+        <div class="col-md-4">
+            <div class="card card-stats card-danger" style="background-color: #92e8b5;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-pencil-square"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Mesaj</p>
+                                <h4 class="card-title" id="messageCount"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">

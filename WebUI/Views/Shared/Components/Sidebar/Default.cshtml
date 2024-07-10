@@ -1,43 +1,6 @@
 
 <div class="sidebar">
 	<div class="scrollbar-inner sidebar-wrapper">
-		<div class="user">
-			<div class="photo">
-				<img src="/AdminTemplate/img/profile.jpg">
-			</div>
-			<div class="info">
-
-				<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-					<span>
-						Hizrian
-						<span class="user-level">Administrator</span>
-						<span class="caret"></span>
-					</span>
-				</a>
-				<div class="clearfix"></div>
-
-				<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
-					<ul class="nav">
-						<li>
-							<a href="#profile">
-								<span class="link-collapse">My Profile</span>
-							</a>
-						</li>
-						<li>
-							<a href="#edit">
-								<span class="link-collapse">Edit Profile</span>
-							</a>
-						</li>
-						<li>
-							<a href="#settings">
-								<span class="link-collapse">Settings</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
 		<ul class="nav">
 			<li class="nav-item">
 				<a asp-controller="Home" asp-action="Index">
@@ -109,6 +72,30 @@
 				<a asp-controller="Testimonial" asp-action="TestimonialList">
 					<i class="la la-dashboard"></i>
 					<p>Deneyimleyenler</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.messageActive">
+				<a asp-controller="Message" asp-action="MessageList">
+					<i class="la la-dashboard"></i>
+					<p>Mesaj</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.socialMediaActive">
+				<a asp-controller="SocialMedia" asp-action="SocialMediaList">
+					<i class="la la-dashboard"></i>
+					<p>Sosyal Medya</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.contactActive">
+				<a asp-controller="Contact" asp-action="ContactList">
+					<i class="la la-dashboard"></i>
+					<p>İletişim</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="User" asp-action="Logout">
+					<i class="la la-dashboard"></i>
+					<p>Çıkış Yap</p>
 				</a>
 			</li>
 		</ul>

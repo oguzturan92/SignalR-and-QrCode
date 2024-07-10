@@ -1,4 +1,4 @@
-
+@model GetFirstContactDto
 
     <footer class="footer_section">
         <div class="container">
@@ -9,15 +9,15 @@
                         <div class="contact_link_box">
                             <a href="">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <span>Konum</span>
+                                <span>@Model.ContactAddress</span>
                             </a>
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                <span>+90 (312) 123 45 67</span>
+                                <span>@Model.ContactPhone</span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span>iletisim@feane.com</span>
+                                <span>@Model.ContactMail</span>
                             </a>
                         </div>
                     </div>
@@ -27,21 +27,12 @@
                         <a href="" class="footer-logo">Feane</a>
                         <p>Fast food dünyasında lezzet ve kaliteyi bir araya getiren öncü bir markayız. Taze ve özenle seçilmiş malzemelerle hazırladığımız yiyeceklerimizle, her damak zevkine hitap eden geniş bir menü sunuyoruz. </p>
                         <div class="footer_social">
-                            <a href="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
+                            @foreach (var item in ViewBag.socialMedias)
+                            {
+                                <a target="_blank" href="@item.SocialMediaLink">
+                                    @Html.Raw(item.SocialMediaIcon)
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>

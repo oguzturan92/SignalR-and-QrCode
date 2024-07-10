@@ -37,6 +37,16 @@ namespace Business.Concrete
             return _sliderDal.GetById(id);
         }
 
+        public string GetFirstSliderImage()
+        {
+            return _sliderDal.GetFirstSliderImage();
+        }
+
+        public List<Slider> GetSliderIsTrue()
+        {
+            return _sliderDal.GetSliderIsTrue();
+        }
+
         public void Update(Slider entity)
         {
             _sliderDal.Update(entity);

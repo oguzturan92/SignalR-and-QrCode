@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebUI.Dtos.BookingDto;
@@ -110,9 +112,35 @@ namespace WebUI.Controllers
             return RedirectToAction("BookingList", "Booking");
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> BookignCreateClient(Booking booking)
+        {
+            booking.BookingStatus = false;
+
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(booking);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7227/api/Booking", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return Json(jsonData);
+            }
+            return RedirectToAction("Index", "Booking");
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
             ViewBag.bookingIndex = "active";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7227/api/Slider/GetFirstSliderImage");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                ViewBag.sliderImageFirst = jsonData;
+            }
             return View();
         }
     }

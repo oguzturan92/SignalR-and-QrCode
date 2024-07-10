@@ -1,0 +1,49 @@
+@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "ContactList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">İletişim Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Any())
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Mail</th>
+                                        <th scope="col" colspan="2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.ContactMail</td>
+                                            <td><a class="btn btn-info" asp-controller="Contact" asp-action="ContactUpdate" asp-route-id="@item.ContactId"><i class="la la-pencil"></i></a></td>
+                                            <td><a class="btn btn-danger" asp-controller="Contact" asp-action="ContactDelete" asp-route-id="@item.ContactId"><i class="la la-trash"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        } else
+                        {
+                            <div class="alert alert-warning" role="alert">Öge mevcut değil</div>
+                        }
+                        <hr>
+                        <a class="btn btn-success" asp-controller="Contact" asp-action="ContactCreate">Yeni</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

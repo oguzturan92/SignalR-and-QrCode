@@ -1,0 +1,68 @@
+@model RegisterDto
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}   
+
+<link rel="icon" type="image/png" href="/UserTemplate/images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/UserTemplate/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/UserTemplate/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/UserTemplate/vendor/animate/animate.css">	
+<link rel="stylesheet" type="text/css" href="/UserTemplate/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="/UserTemplate/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="/UserTemplate/css/util.css">
+<link rel="stylesheet" type="text/css" href="/UserTemplate/css/main.css">
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="/Template/images/o2.jpg" alt="IMG">
+				</div>
+
+				<form asp-controller="User" asp-action="Register" class="login100-form validate-form">
+					<span class="login100-form-title">KAYIT OL</span>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" asp-for="Name" placeholder="Ad">
+					</div>
+
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" asp-for="Surname" placeholder="Soyad">
+					</div>
+
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" asp-for="Username" placeholder="Kullanıcı Adı">
+					</div>
+
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" asp-for="Mail" placeholder="Mail">
+					</div>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="password" asp-for="Password" placeholder="Şifre">
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">Kayıt Ol</button>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" asp-controller="User" asp-action="Login">Giriş Yap <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i></a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+<script src="/UserTemplate/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/UserTemplate/vendor/bootstrap/js/popper.js"></script>
+<script src="/UserTemplate/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/UserTemplate/vendor/select2/select2.min.js"></script>
+<script src="/UserTemplate/vendor/tilt/tilt.jquery.min.js"></script>
+<script >
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<script src="js/main.js"></script>

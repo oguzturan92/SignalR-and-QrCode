@@ -106,7 +106,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("ProductCount")]
-        public async Task<IActionResult> ProductCount()
+        public IActionResult ProductCount()
         {
             var result = _productService.ProductCount();
             return Ok(result);

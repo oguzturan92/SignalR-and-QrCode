@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebUI.Dtos.AboutDto;
@@ -103,9 +104,18 @@ namespace WebUI.Controllers
             return RedirectToAction("AboutList", "About");
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
             ViewBag.aboutIndex = "active";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7227/api/Slider/GetFirstSliderImage");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                ViewBag.sliderImageFirst = jsonData;
+            }
             return View();
         }
     }

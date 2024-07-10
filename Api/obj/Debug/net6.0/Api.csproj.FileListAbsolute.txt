@@ -66,3 +66,4 @@ C:\Users\proje\SignalRAndQrCode\Api\obj\Debug\net6.0\Api.dll
 C:\Users\proje\SignalRAndQrCode\Api\obj\Debug\net6.0\ref\Api.dll
 C:\Users\proje\SignalRAndQrCode\Api\obj\Debug\net6.0\Api.pdb
 C:\Users\proje\SignalRAndQrCode\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
+C:\Users\proje\SignalRAndQrCode\Api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

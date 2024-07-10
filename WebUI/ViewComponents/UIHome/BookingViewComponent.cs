@@ -8,8 +8,21 @@ namespace WebUI.ViewComponents.UIHome
 {
     public class BookingViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly IHttpClientFactory _httpClientFactory;
+        public BookingViewComponent(IHttpClientFactory httpClientFactory)
         {
+            _httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client.GetAsync("https://localhost:7227/api/Contact/GetFirstContactMapUrl");
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.mapUrl = jsonData;
+            }
             return View();
         }
     }

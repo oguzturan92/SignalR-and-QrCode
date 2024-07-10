@@ -79,7 +79,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("BookingCount")]
-        public async Task<IActionResult> BookingCount()
+        public IActionResult BookingCount()
         {
             var result = _bookingService.BookingCount();
             return Ok(result);

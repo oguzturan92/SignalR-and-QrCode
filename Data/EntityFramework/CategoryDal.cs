@@ -28,7 +28,7 @@ namespace Data.EntityFramework
         {
             using (var context = new Context())
             {
-                return context.Categories.Include(i => i.Products).ToList();
+                return context.Categories.Include(i => i.Products.Where(i => i.ProductStatus)).ToList();
             }
         }
     }

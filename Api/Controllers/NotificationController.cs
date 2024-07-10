@@ -36,8 +36,7 @@ namespace Api.Controllers
             var value = new Notification()
             {
                 NotificationContent = createNotificationDto.NotificationContent,
-                NotificationDate = createNotificationDto.NotificationDate,
-                NotificationRead = createNotificationDto.NotificationRead
+                NotificationDate = createNotificationDto.NotificationDate
             };
             _notificationService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -57,8 +56,7 @@ namespace Api.Controllers
             {
                 NotificationId = updateNotificationDto.NotificationId,
                 NotificationContent = updateNotificationDto.NotificationContent,
-                NotificationDate = updateNotificationDto.NotificationDate,
-                NotificationRead = updateNotificationDto.NotificationRead
+                NotificationDate = updateNotificationDto.NotificationDate
             };
             _notificationService.Update(value);
             return Ok("Güncelleme işlemi başarılı");

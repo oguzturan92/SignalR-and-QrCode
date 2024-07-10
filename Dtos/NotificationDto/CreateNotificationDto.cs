@@ -9,6 +9,5 @@ namespace Dtos.NotificationDto
     {
         public string NotificationContent { get; set; }
         public DateTime NotificationDate { get; set; }
-        public bool NotificationRead { get; set; }
     }
 }

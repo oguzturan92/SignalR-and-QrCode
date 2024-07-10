@@ -37,7 +37,9 @@ namespace Api.Controllers
             {
                 SliderTitle = createSliderDto.SliderTitle,
                 SliderSubTitle = createSliderDto.SliderSubTitle,
-                SliderLink = createSliderDto.SliderLink
+                SliderLink = createSliderDto.SliderLink,
+                SliderStatus = createSliderDto.SliderStatus,
+                SliderImage = createSliderDto.SliderImage
             };
             _sliderService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -58,7 +60,9 @@ namespace Api.Controllers
                 SliderId = updateSliderDto.SliderId,
                 SliderTitle = updateSliderDto.SliderTitle,
                 SliderSubTitle = updateSliderDto.SliderSubTitle,
-                SliderLink = updateSliderDto.SliderLink
+                SliderLink = updateSliderDto.SliderLink,
+                SliderStatus = updateSliderDto.SliderStatus,
+                SliderImage = updateSliderDto.SliderImage
             };
             _sliderService.Update(value);
             return Ok("Güncelleme işlemi başarılı");
@@ -70,6 +74,20 @@ namespace Api.Controllers
             var value = _sliderService.GetById(id);
             _sliderService.Delete(value);
             return Ok("Silme İşlemi Başarılı");
+        }
+
+        [HttpGet("GetSliderIsTrue")]
+        public IActionResult GetSliderIsTrue()
+        {
+            var values = _mapper.Map<List<ResultSliderDto>>(_sliderService.GetSliderIsTrue());
+            return Ok(values);
+        }
+
+        [HttpGet("GetFirstSliderImage")]
+        public IActionResult GetFirstSliderImage()
+        {
+            var value = _sliderService.GetFirstSliderImage();
+            return Ok(value);
         }
     }
 }
