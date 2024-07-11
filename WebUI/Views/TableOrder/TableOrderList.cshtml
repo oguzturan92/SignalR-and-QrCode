@@ -4,18 +4,31 @@
     Layout = "_LayoutAdmin";
 }
 
+    <style>
+        .table-isFull {
+            position: absolute;
+            left: 0px;
+            top: -20px;
+            background-color: #c60000;
+            color: #fff;
+            border-radius: 100px;
+            padding: 10px;
+            font-size: 25px;
+        }
+    </style>
+
     <div class="container-fluid">
         <div class="row">
 
             @foreach (var item in Model)
             {
-                <a asp-controller="TableOrder" asp-action="TableOrderDetail" asp-route-tableId="@item.TableId" asp-route-tableTitle="@item.TableTitle" class="col-md-3">
-                    <div class="card card-stats card-warning">
+                <a asp-controller="TableOrder" asp-action="TableOrderDetail" asp-route-tableId="@item.TableId" asp-route-tableTitle="@item.TableTitle" class="col-md-3" id="@item.TableId">
+                    <div class="card card-stats card-warning" style="background-color: @item.TableColor;">
                         <div class="card-body ">
                             <div class="row">
                                 <div class="col-5">
                                     <div class="icon-big text-center">
-                                        <i class="la la-clone"></i>
+                                        <i class="la la-cutlery"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 d-flex align-items-center">
@@ -27,8 +40,48 @@
                             </div>
                         </div>
                     </div>
+                    <i class="la la-exclamation table-isFull" style="display: @(item.TableIsItFull ? "block":"none");"></i>
                 </a>
             }
 
         </div>
     </div>
+
+    <!-- ADİSYON KAĞANDIĞINDA ÇALIŞIR -->
+    @if (TempData["signalrActive"] != null)
+    {
+        @section Scripts
+        {
+            <script src="/lib/signalr/signalr.js"></script>
+            <script src="/lib/signalr/signalr.min.js"></script>
+
+            <script>
+
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7227/SignalRHub").build();
+
+                // Connection, Start olduktan sonra
+                connection.start().then(() => {
+                    
+                    // Hub sınıfı metod adı ile metod tetiklenir
+                    connection.invoke("SendTableIsFullChange", @ViewBag.tableId);
+
+                    // Adisyon açıldığında masanın dolu olduğunu ifade eden ikon ekler, kapatıldığında ise ikonu gizler
+                    connection.on("ReceiveTableIsFullChange", function (value) {
+                        
+                        var element = document.getElementById(value);
+
+                        var iTag = element.lastElementChild;
+                        if (iTag.style.display == "block")
+                        {
+                            iTag.style.display = "none";
+                        } else
+                        {
+                            iTag.style.display = "block";
+                        }
+                    });
+
+                }).catch((err) => { console.log(err) });
+
+            </script>
+        }
+    }

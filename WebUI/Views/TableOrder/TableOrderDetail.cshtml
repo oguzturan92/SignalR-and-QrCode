@@ -31,7 +31,7 @@
                                             <td>@Model.Order.OrderTableNumber</td>
                                             <td>@Model.Order.OrderDescription</td>
                                             <td>@Model.Order.OrderLines.Sum(i => i.ProductPrice * i.ProductCount)</td>
-                                            <form  asp-controller="TableOrder" asp-action="TableOrderComplate" asp-route-orderId="@Model.Order.OrderId" method="post">
+                                            <form  asp-controller="TableOrder" asp-action="TableOrderComplate" asp-route-orderId="@Model.Order.OrderId" asp-route-tableId="@ViewBag.tableId" method="post">
                                                 <input type="hidden" name="totalPrice" value="@Model.Order.OrderLines.Sum(i => i.ProductPrice * i.ProductCount)">
                                                 <td><button type="submit" class="btn btn-success">Adisyonu Kapat</button></td>
                                             </form>
@@ -180,9 +180,11 @@
 
                 // Connection, Start olduktan sonra
                 connection.start().then(() => {
-                    
+
                     // Hub sınıfı metod adı ile metod tetiklenir
                     connection.invoke("SendOrderCount");
+
+                    connection.invoke("SendTableIsFullChange", @ViewBag.tableId);
 
                 }).catch((err) => { console.log(err) });
 

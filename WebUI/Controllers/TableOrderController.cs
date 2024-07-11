@@ -25,6 +25,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> TableOrderList()
         {
             ViewBag.tableOrderActive = "active";
+            ViewBag.tableId = TempData["tableId"];
 
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7227/api/TableOrder");
@@ -77,6 +78,7 @@ namespace WebUI.Controllers
         {
             if (orderId > 0)
             {
+                // ORDERID 0'DAN BÜYÜKSE, AÇIK ADİSYON VAR DEMEKTİR VE ORDERLİNE EKLENİR
                 var client1 = _httpClientFactory.CreateClient();
                 var responseMessage1 = await client1.GetAsync("https://localhost:7227/api/Orderline/" + orderId + "," + productName);
                 if (responseMessage1.IsSuccessStatusCode)
@@ -120,7 +122,7 @@ namespace WebUI.Controllers
                 }
             } else
             {
-                // Adisyon açma
+                // ADİSYON AÇMA
                 var order = new CreateOrderDto()
                 {
                     TableId = tableId,
@@ -189,8 +191,10 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TableOrderComplate(int orderId, decimal totalPrice)
+        public async Task<IActionResult> TableOrderComplate(int tableId, int orderId, decimal totalPrice)
         {
+            TempData["tableId"] = tableId;
+            
             var client1 = _httpClientFactory.CreateClient();
             var responseMessage1 = await client1.GetAsync("https://localhost:7227/api/Order/" + orderId);
             if (responseMessage1.IsSuccessStatusCode)
@@ -211,6 +215,7 @@ namespace WebUI.Controllers
                     {
                         TempData["icon"] = "success";
                         TempData["text"] = "Adisyon kapatıldı";
+                        TempData["signalrActive"] = "true";
                     }
                 }
             }

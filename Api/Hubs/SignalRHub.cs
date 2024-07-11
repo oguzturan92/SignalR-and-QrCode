@@ -14,14 +14,16 @@ namespace Api.Hubs
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
         private readonly IMessageService _messageService;
+        private readonly ITableService _tableService;
 
-        public SignalRHub(IBookingService bookingService, ICategoryService categoryService, IProductService productService, IOrderService orderService, IMessageService messageService)
+        public SignalRHub(IBookingService bookingService, ICategoryService categoryService, IProductService productService, IOrderService orderService, IMessageService messageService, ITableService tableService)
         {
             _bookingService = bookingService;
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
             _messageService = messageService;
+            _tableService = tableService;
         }
 
         public async Task SendCategoryCount()
@@ -52,6 +54,20 @@ namespace Api.Hubs
         {
             var value = _messageService.GetAll().Count();
             await Clients.All.SendAsync("ReceiveMessageCount", value);
+        }
+
+        public async Task SendTableIsFullChange(int tableId)
+        {
+            var value = _tableService.GetById(tableId);
+            if (value.TableIsItFull)
+            {
+                value.TableIsItFull = false;
+            } else
+            {
+                value.TableIsItFull = true;
+            }
+            _tableService.Update(value);
+            await Clients.All.SendAsync("ReceiveTableIsFullChange", value.TableId);
         }
     }
 }

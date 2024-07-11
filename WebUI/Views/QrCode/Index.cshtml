@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
+}
+
+    <style>
+        .qrCodeBox {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <div class="qrCodeBox">
+        <div id="qrcode"></div>
+    </div>
+
+    <div class="card-body container">
+        <div class="form-group">
+            <label for="text">Hedef Url</label>
+            <input type="text" class="form-control" id="text">
+        </div>
+        <div class="form-group">
+            <label for="width">Yükseklik (Pixel)</label>
+            <input type="text" class="form-control" id="width">
+        </div>
+        <div class="form-group">
+            <label for="height">Genişlik (Pixel)</label>
+            <input type="text" class="form-control" id="height">
+        </div>
+        <div class="form-group">
+            <label for="colorDark">Renk (RGB)</label>
+            <input type="text" class="form-control" id="colorDark">
+        </div>
+        <div class="form-group">
+            <label for="colorLight">Arka Plan Renk (RGB)</label>
+            <input type="text" class="form-control" id="colorLight">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" id="button" type="button">Oluştur</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        
+        var qrcode = document.getElementById("qrcode");
+        var text = document.getElementById("text");
+        var width = document.getElementById("width");
+        var height = document.getElementById("height");
+        var colorDark = document.getElementById("colorDark");
+        var colorLight = document.getElementById("colorLight");
+
+        document.getElementById("button").addEventListener("click", newFunc);
+
+        function newFunc() {
+            
+            qrcode.innerHTML = "";
+
+            new QRCode(qrcode, {
+                text: text.value,
+                width: width.value,
+                height: height.value,
+                colorDark: colorDark.value,
+                colorLight: colorLight.value,
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+        }
+
+    </script>

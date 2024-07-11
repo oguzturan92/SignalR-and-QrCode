@@ -62,3 +62,4 @@ C:\Users\proje\SignalRAndQrCode\WebUI\obj\Debug\net6.0\WebUI.pdb
 C:\Users\proje\SignalRAndQrCode\WebUI\obj\Debug\net6.0\WebUI.genruntimeconfig.cache
 C:\Users\proje\SignalRAndQrCode\WebUI\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\proje\SignalRAndQrCode\WebUI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\proje\SignalRAndQrCode\WebUI\bin\Debug\net6.0\QRCoder.dll

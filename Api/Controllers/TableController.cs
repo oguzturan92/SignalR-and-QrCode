@@ -36,7 +36,9 @@ namespace Api.Controllers
             var value = new Table()
             {
                 TableTitle = createTableDto.TableTitle,
-                TableStatus = createTableDto.TableStatus
+                TableStatus = createTableDto.TableStatus,
+                TableColor = createTableDto.TableColor,
+                TableIsItFull = createTableDto.TableIsItFull
             };
             _tableService.Create(value);
             return Ok("Ekleme işlemi başarılı");
@@ -56,7 +58,9 @@ namespace Api.Controllers
             {
                 TableId = updateTableDto.TableId,
                 TableTitle = updateTableDto.TableTitle,
-                TableStatus = updateTableDto.TableStatus
+                TableStatus = updateTableDto.TableStatus,
+                TableColor = updateTableDto.TableColor,
+                TableIsItFull = updateTableDto.TableIsItFull
             };
             _tableService.Update(value);
             return Ok("Güncelleme işlemi başarılı");

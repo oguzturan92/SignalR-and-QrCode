@@ -9,5 +9,7 @@ namespace Dtos.TableDto
     {
         public string TableTitle { get; set; }
         public bool TableStatus { get; set; }
+        public bool TableIsItFull { get; set; }
+        public string TableColor { get; set; }
     }
 }
