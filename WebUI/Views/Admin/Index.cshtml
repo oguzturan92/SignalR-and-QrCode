@@ -21,6 +21,7 @@
             connection.invoke("SendBookingCount");
             connection.invoke("SendOrderCount");
             connection.invoke("SendMessageCount");
+            connection.invoke("SendActiveTableCount");
 
             // Hub sınıfından gelen metodlar/yanıtlar
             connection.on("ReceiveCategoryCount", function (value) {
@@ -35,8 +36,11 @@
             connection.on("ReceiveOrderCount", function (value) {
                 $("#orderCount").text(value);
             });
-            connection.on("receiveMessageCount", function (value) {
+            connection.on("ReceiveMessageCount", function (value) {
                 $("#messageCount").text(value);
+            });
+            connection.on("ReceiveActiveTableCount", function (value) {
+                $("#activeTableCount").text(value);
             });
 
         }).catch((err) => { console.log(err) });
@@ -49,7 +53,7 @@
     <!-- İSTATİSTİKLER -->
     <div class="row">
         <div class="col-md-4">
-            <div class="card card-stats card-warning">
+            <div class="card card-stats card-warning" style="background-color: #e8e292;">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
@@ -68,7 +72,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card card-stats card-success">
+            <div class="card card-stats card-success" style="background-color: #929ce8;">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
@@ -87,7 +91,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card card-stats card-danger">
+            <div class="card card-stats card-danger" style="background-color: #d392e8;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
@@ -106,7 +110,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card card-stats card-danger" style="background-color: #8c88dc;">
+            <div class="card card-stats card-danger" style="background-color: #dc8888;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
@@ -137,6 +141,25 @@
                             <div class="numbers">
                                 <p class="card-category">Mesaj</p>
                                 <h4 class="card-title" id="messageCount"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-stats card-danger" style="background-color: #74b3e0;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-pencil-square"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Dolu Masa</p>
+                                <h4 class="card-title" id="activeTableCount"></h4>
                             </div>
                         </div>
                     </div>

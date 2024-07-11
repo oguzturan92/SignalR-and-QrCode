@@ -186,6 +186,8 @@
 
                     connection.invoke("SendTableIsFullChange", @ViewBag.tableId);
 
+                    connection.invoke("SendActiveTableCount");
+
                 }).catch((err) => { console.log(err) });
 
             </script>

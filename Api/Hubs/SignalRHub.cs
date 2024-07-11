@@ -42,6 +42,7 @@ namespace Api.Hubs
         {
             var value = _bookingService.GetAll().Count();
             await Clients.All.SendAsync("ReceiveBookingCount", value);
+            await Clients.All.SendAsync("NotificationBooking");
         }
 
         public async Task SendOrderCount()
@@ -54,6 +55,7 @@ namespace Api.Hubs
         {
             var value = _messageService.GetAll().Count();
             await Clients.All.SendAsync("ReceiveMessageCount", value);
+            await Clients.All.SendAsync("NotificationMessage");
         }
 
         public async Task SendTableIsFullChange(int tableId)
@@ -68,6 +70,12 @@ namespace Api.Hubs
             }
             _tableService.Update(value);
             await Clients.All.SendAsync("ReceiveTableIsFullChange", value.TableId);
+        }
+
+        public async Task SendActiveTableCount()
+        {
+            var value = _tableService.GetAll().Where(x => x.TableIsItFull).Count();
+            await Clients.All.SendAsync("ReceiveActiveTableCount", value);
         }
     }
 }

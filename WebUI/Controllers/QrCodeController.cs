@@ -14,12 +14,6 @@ namespace WebUI.Controllers
             ViewBag.qrcodeActive = "active";
             return View();
         }
-
-        [HttpPost]
-        public IActionResult Index(string value)
-        {
-            return RedirectToAction("Index", "Home");
-        }
         
     }
 }
